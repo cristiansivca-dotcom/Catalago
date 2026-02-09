@@ -5,10 +5,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Catálogo PromoPolar</title>
+        <title>Catálogo SIVCA</title>
         <meta
           name="description"
-          content="Catálogo de promotoras y vestuario térmico PromoPolar"
+          content="Catálogo de promotoras y vestuario térmico SIVCA"
         />
       </Head>
       <Catalogo />
