@@ -7,6 +7,7 @@ export default function Home() {
       <Head>
         <title>Catálogo SIVCA</title>
         <meta name="description" content="Catálogo de promotoras y vestuario térmico SIVCA" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Catalogo />
     </>
