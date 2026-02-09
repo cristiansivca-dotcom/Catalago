@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { ShoppingBag, Menu, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ShoppingBag, Menu } from 'lucide-react';
 
 const Navbar = ({ activeTab, setActiveTab, cartCount, toggleCart }) => {
     const [scrolled, setScrolled] = useState(false);
@@ -43,8 +43,8 @@ const Navbar = ({ activeTab, setActiveTab, cartCount, toggleCart }) => {
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
                                 className={`relative py-1 font-bold text-xs tracking-widest uppercase transition-all duration-300 ${activeTab === tab
-                                        ? 'text-blue-600'
-                                        : 'text-gray-500 hover:text-gray-900'
+                                    ? 'text-blue-600'
+                                    : 'text-gray-500 hover:text-gray-900'
                                     }`}
                             >
                                 {tab === 'inicio' ? 'INICIO' : 'STAFF & MODELOS'}
