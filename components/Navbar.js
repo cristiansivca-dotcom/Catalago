@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { ShoppingBag, Menu, ExternalLink } from "lucide-react";
 
-const Navbar = ({ activeTab, setActiveTab, cartCount, toggleCart }) => {
+const Navbar = ({ activeTab, setActiveTab, cartCount, toggleCart, toggleMenu }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -102,10 +102,10 @@ const Navbar = ({ activeTab, setActiveTab, cartCount, toggleCart }) => {
               </button>
             )}
             <button
-              onClick={() => setActiveTab("talentos")}
-              className="md:hidden p-2 text-gray-900 bg-gray-100/50 rounded-full hover:bg-gray-100 transition-all"
+              onClick={toggleMenu}
+              className="md:hidden p-3 text-gray-900 bg-gray-100/50 rounded-2xl hover:bg-gray-100 transition-all active:scale-90 border border-transparent hover:border-gray-200"
             >
-              <Menu size={22} />
+              <Menu size={22} strokeWidth={2.5} />
             </button>
           </div>
         </div>

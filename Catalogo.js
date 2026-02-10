@@ -8,6 +8,7 @@ import TalentList from "./components/TalentList";
 import Footer from "./components/Footer";
 import ImageModal from "./components/ImageModal";
 import CartSidebar from "./components/CartSidebar";
+import MobileMenu from "./components/MobileMenu";
 import Toast from "./components/Toast";
 
 // Data
@@ -17,6 +18,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState("inicio");
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
   const whatsappNumber = "584121901044";
@@ -73,6 +75,14 @@ export default function App() {
         setActiveTab={setActiveTab}
         cartCount={cart.length}
         toggleCart={() => setIsCartOpen(!isCartOpen)}
+        toggleMenu={() => setIsMenuOpen(!isMenuOpen)}
+      />
+
+      <MobileMenu
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
       />
 
       <CartSidebar
