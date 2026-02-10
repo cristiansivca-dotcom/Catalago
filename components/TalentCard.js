@@ -92,12 +92,9 @@ const TalentCard = ({ data, onAdd, isAdded, onViewImage }) => (
         )}
       </div>
 
-      {/* Description Snippet Glass */}
       {data.descripcion && (
         <div className="mb-8 p-4 bg-slate-500/5 rounded-2xl border border-slate-500/10 italic">
-          <p className="text-xs text-slate-500 leading-relaxed line-clamp-2">
-            &quot;{data.descripcion}&quot;
-          </p>
+          <p className="text-xs text-slate-500 leading-relaxed">&quot;{data.descripcion}&quot;</p>
         </div>
       )}
 
