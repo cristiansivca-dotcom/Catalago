@@ -16,9 +16,9 @@ const Hero = ({ setActiveTab }) => (
     <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         <div className="text-left space-y-8 animate-fade-in-up">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium backdrop-blur-sm">
-            <Star size={14} fill="currentColor" />
-            <span>Agencia Líder en Protocolo & BTL</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold backdrop-blur-md shadow-sm">
+            <Star size={12} fill="currentColor" />
+            <span className="tracking-wider uppercase">Agencia Líder en Protocolo & BTL</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight">
@@ -44,7 +44,7 @@ const Hero = ({ setActiveTab }) => (
             </button>
             <button
               onClick={() => window.open("https://wa.me/584121901044", "_blank")}
-              className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-semibold rounded-xl transition-all border border-white/10 hover:border-white/20 backdrop-blur-sm flex items-center justify-center"
+              className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-bold rounded-xl transition-all border border-white/10 hover:border-white/20 backdrop-blur-md flex items-center justify-center shadow-lg transform hover:-translate-y-1"
             >
               Contáctanos
             </button>
@@ -64,8 +64,8 @@ const Hero = ({ setActiveTab }) => (
 
         <div className="hidden lg:block relative">
           {/* Abstract visual element or placeholder for a hero image */}
-          <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-slate-800/50 backdrop-blur-sm p-4 transform rotate-2 hover:rotate-0 transition-all duration-500">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20"></div>
+          <div className="relative rounded-[2rem] overflow-hidden border border-white/20 shadow-2xl bg-white/5 backdrop-blur-xl p-4 transform rotate-2 hover:rotate-0 transition-all duration-700 ease-out group">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent"></div>
             <div className="aspect-[4/5] rounded-xl overflow-hidden bg-slate-900 relative">
               <Image
                 src="/modelos/waleska.jpg"

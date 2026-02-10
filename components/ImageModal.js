@@ -24,7 +24,7 @@ const ImageModal = ({ images, altText, onClose }) => {
     >
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors p-2 z-50 bg-white/10 rounded-full backdrop-blur-sm"
+        className="absolute top-6 right-6 text-white/80 hover:text-white transition-all p-3 z-50 bg-white/10 hover:bg-white/20 rounded-full backdrop-blur-xl border border-white/10 shadow-lg"
       >
         <X size={24} />
       </button>
@@ -33,15 +33,15 @@ const ImageModal = ({ images, altText, onClose }) => {
         <>
           <button
             onClick={handlePrev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white hover:bg-white/20 transition-all p-3 z-50 rounded-full"
+            className="absolute left-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 transition-all p-4 z-50 rounded-full backdrop-blur-xl border border-white/10 shadow-2xl group"
           >
-            <ChevronLeft size={40} />
+            <ChevronLeft size={40} className="group-hover:-translate-x-1 transition-transform" />
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white hover:bg-white/20 transition-all p-3 z-50 rounded-full"
+            className="absolute right-6 top-1/2 -translate-y-1/2 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 transition-all p-4 z-50 rounded-full backdrop-blur-xl border border-white/10 shadow-2xl group"
           >
-            <ChevronRight size={40} />
+            <ChevronRight size={40} className="group-hover:translate-x-1 transition-transform" />
           </button>
         </>
       )}

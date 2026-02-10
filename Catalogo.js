@@ -38,25 +38,24 @@ export default function App() {
     } else {
       showToast(`${item.nombre} ya está en tu selección`, "info");
     }
-
-    setIsCartOpen(true);
   };
 
   const removeFromCart = (id) => {
     setCart(cart.filter((item) => item.id !== id));
   };
 
-  const handleWhatsAppQuote = () => {
+  const handleWhatsAppQuote = (customMessage) => {
     if (cart.length === 0) return;
 
     const baseUrl = `https://wa.me/${whatsappNumber}`;
     const lines = cart.map((item) => `- ${item.nombre} (${item.genero || "Talento"})`);
-    const text =
+    const defaultText =
       `Hola, me gustaría cotizar los siguientes perfiles del Catálogo SIVCA:\n` +
       `${lines.join("\n")}\n\n` +
       `Por favor envíen disponibilidad y presupuesto.`;
 
-    const url = `${baseUrl}?text=${encodeURIComponent(text)}`;
+    const textToUse = customMessage || defaultText;
+    const url = `${baseUrl}?text=${encodeURIComponent(textToUse)}`;
 
     showToast("Abriendo WhatsApp para enviar tu solicitud...", "info");
 

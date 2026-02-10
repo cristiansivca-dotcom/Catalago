@@ -6,7 +6,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-900 text-gray-300 pt-20 pb-10 border-t border-white/5">
+    <footer className="bg-slate-900 text-gray-300 pt-20 pb-10 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand Column */}
@@ -56,8 +56,14 @@ const Footer = () => {
             <ul className="space-y-4">
               {["Inicio", "Staff & Modelos"].map((item) => (
                 <li key={item}>
-                  <a
-                    href="#"
+                  <button
+                    onClick={() => {
+                      // Note: This relies on the setActiveTab prop being available or passed down.
+                      // Since Footer doesn't receive it, I'll use a standard link or a window location change if needed.
+                      // But for now, let's keep it simple or use a window reload if on SPA.
+                      // Actually, let's just make them point to the main site or stay on page.
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
                     className="text-sm hover:text-blue-400 transition-colors flex items-center group"
                   >
                     <ArrowUpRight
@@ -65,9 +71,23 @@ const Footer = () => {
                       className="mr-2 opacity-0 group-hover:opacity-100 transition-all -ml-4 group-hover:ml-0"
                     />
                     {item}
-                  </a>
+                  </button>
                 </li>
               ))}
+              <li>
+                <a
+                  href="https://www.sivca.com.ve"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm hover:text-blue-400 transition-colors flex items-center group"
+                >
+                  <ArrowUpRight
+                    size={14}
+                    className="mr-2 opacity-0 group-hover:opacity-100 transition-all -ml-4 group-hover:ml-0"
+                  />
+                  Sitio Web Principal
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -118,15 +138,18 @@ const Footer = () => {
                 ),
               )}
             </div>
-            <div className="mt-8 p-4 bg-blue-600/10 border border-blue-600/20 rounded-xl">
-              <p className="text-xs text-blue-400 font-medium mb-1">¿Buscas empleo?</p>
+            <div className="mt-8 p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-[2rem] shadow-inner">
+              <p className="text-xs text-blue-400 font-bold mb-2 uppercase tracking-widest">
+                ¿Buscas empleo?
+              </p>
               <a
                 href="https://sivca.com.ve/#contact"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-white font-bold flex items-center gap-1 hover:underline"
+                className="text-sm text-white font-bold flex items-center gap-2 hover:text-blue-400 transition-colors group"
               >
-                ¡Únete a nuestro Staff! <Globe size={14} />
+                ¡Únete a nuestro Staff!{" "}
+                <Globe size={16} className="group-hover:rotate-12 transition-transform" />
               </a>
             </div>
           </div>

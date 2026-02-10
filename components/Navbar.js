@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { ShoppingBag, Menu } from "lucide-react";
+import { ShoppingBag, Menu, ExternalLink } from "lucide-react";
 
 const Navbar = ({ activeTab, setActiveTab, cartCount, toggleCart }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -15,9 +15,11 @@ const Navbar = ({ activeTab, setActiveTab, cartCount, toggleCart }) => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 bg-white ${
-        scrolled ? "shadow-lg h-16" : "shadow-sm h-20"
-      } border-b border-gray-100`}
+      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-500 ${
+        scrolled
+          ? "bg-white/80 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.05)] h-16 border-b border-gray-200/50"
+          : "bg-white/50 backdrop-blur-sm h-20 border-b border-transparent"
+      }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
         <div className="flex justify-between items-center h-full">
@@ -27,7 +29,9 @@ const Navbar = ({ activeTab, setActiveTab, cartCount, toggleCart }) => {
             onClick={() => setActiveTab("inicio")}
           >
             <div
-              className={`relative transition-all duration-300 ${scrolled ? "h-8 w-24" : "h-10 w-32"}`}
+              className={`relative transition-all duration-500 scale-95 group-hover:scale-100 ${
+                scrolled ? "h-8 w-24" : "h-10 w-32"
+              }`}
             >
               <Image
                 src="/logos/logo_sivca.png"
@@ -37,44 +41,71 @@ const Navbar = ({ activeTab, setActiveTab, cartCount, toggleCart }) => {
                 priority
               />
             </div>
-            <span className="font-bold tracking-tight text-xl text-gray-900">
-              Catálogo <span className="text-blue-500 font-extrabold">SIVCA</span>
-            </span>
+            <div className="flex flex-col -space-y-1">
+              <span className="font-black tracking-tight text-xl text-gray-900">Catálogo</span>
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-blue-600">
+                SIVCA VENEZUELA
+              </span>
+            </div>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-10">
+          <div className="hidden md:flex items-center space-x-8">
             {["inicio", "talentos"].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`relative py-1 font-bold text-xs tracking-widest uppercase transition-all duration-300 ${
+                className={`relative py-1 font-bold text-[11px] tracking-[0.15em] uppercase transition-all duration-500 group ${
                   activeTab === tab ? "text-blue-600" : "text-gray-500 hover:text-gray-900"
                 }`}
               >
                 {tab === "inicio" ? "INICIO" : "STAFF & MODELOS"}
-                {activeTab === tab && (
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-600 rounded-full"></span>
-                )}
+                <span
+                  className={`absolute -bottom-1 left-0 h-[2px] bg-blue-600 rounded-full transition-all duration-500 ${
+                    activeTab === tab ? "w-full" : "w-0 group-hover:w-1/2"
+                  }`}
+                ></span>
               </button>
             ))}
+            <a
+              href="https://www.sivca.com.ve"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 py-2 px-4 rounded-full font-bold text-[11px] tracking-[0.1em] uppercase bg-gray-900/5 hover:bg-blue-600 hover:text-white text-gray-700 transition-all duration-500"
+            >
+              SIVCA.COM.VE
+              <ExternalLink size={12} strokeWidth={3} />
+            </a>
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            {activeTab !== "inicio" && (
+              <button
+                onClick={toggleCart}
+                className={`relative p-2.5 rounded-full transition-all duration-500 border ${
+                  scrolled
+                    ? "bg-blue-600 text-white border-transparent shadow-lg shadow-blue-200"
+                    : "bg-white/50 text-gray-700 border-gray-200/50 hover:bg-white hover:shadow-md"
+                }`}
+              >
+                <ShoppingBag size={20} strokeWidth={2.5} />
+                {cartCount > 0 && (
+                  <span
+                    className={`absolute -top-1 -right-1 inline-flex items-center justify-center min-w-[20px] h-[20px] text-[10px] font-black rounded-full shadow-sm ${
+                      scrolled ? "bg-white text-blue-600" : "bg-blue-600 text-white"
+                    }`}
+                  >
+                    {cartCount}
+                  </span>
+                )}
+              </button>
+            )}
             <button
-              onClick={toggleCart}
-              className="relative p-2 rounded-full text-gray-700 hover:bg-gray-100 transition-all border border-transparent"
+              onClick={() => setActiveTab("talentos")}
+              className="md:hidden p-2 text-gray-900 bg-gray-100/50 rounded-full hover:bg-gray-100 transition-all"
             >
-              <ShoppingBag size={22} strokeWidth={2} />
-              {cartCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 inline-flex items-center justify-center min-w-[18px] h-[18px] text-[10px] font-black text-white bg-blue-600 rounded-full shadow-md">
-                  {cartCount}
-                </span>
-              )}
-            </button>
-            <button className="md:hidden p-2 text-gray-900 hover:bg-gray-100 rounded-lg">
-              <Menu size={24} />
+              <Menu size={22} />
             </button>
           </div>
         </div>

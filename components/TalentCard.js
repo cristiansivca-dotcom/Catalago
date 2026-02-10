@@ -3,116 +3,123 @@ import Image from "next/image";
 import { Users, Maximize2, Star, Calendar, MapPin, CheckCircle, ShoppingBag } from "lucide-react";
 
 const TalentCard = ({ data, onAdd, isAdded, onViewImage }) => (
-  <div className="group bg-white rounded-[2rem] shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 flex flex-col h-full relative">
+  <div className="group bg-white/40 backdrop-blur-md rounded-[2.5rem] shadow-sm hover:shadow-3xl transition-all duration-700 overflow-hidden border border-white/60 flex flex-col h-full relative ring-1 ring-white/20 hover:ring-blue-500/30">
     {/* Profile Image Section */}
     <div
-      className="h-80 w-full bg-slate-100 relative flex items-center justify-center overflow-hidden cursor-pointer"
+      className="h-[28rem] w-full bg-slate-200 relative flex items-center justify-center overflow-hidden cursor-pointer"
       onClick={() => onViewImage(data)}
     >
-      {/* Soft Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+      {/* Premium Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-40 group-hover:opacity-60 transition-opacity duration-700 z-10" />
 
       {data.fotos && data.fotos.length > 0 ? (
         <Image
           src={data.fotos[0]}
           alt={data.nombre}
           fill
-          className="object-cover relative z-0 transition-transform duration-1000 ease-out group-hover:scale-110"
+          className="object-cover relative z-0 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110 group-hover:rotate-1"
         />
       ) : (
-        <div className="flex flex-col items-center gap-3 opacity-20">
-          <Users size={64} className="text-slate-400" />
-          <span className="text-xs font-semibold uppercase tracking-widest">Sin imagen</span>
+        <div className="flex flex-col items-center gap-4 opacity-30">
+          <Users size={80} className="text-slate-400" />
+          <span className="text-[10px] font-black uppercase tracking-[0.3em]">Sin Portafolio</span>
         </div>
       )}
 
-      {/* Floating Badges */}
-      <div className="absolute top-4 left-4 flex flex-col gap-2 z-20">
+      {/* Floating Badges iOS Style */}
+      <div className="absolute top-6 left-6 flex flex-col gap-2 z-20">
         {data.tags.slice(0, 2).map((tag, idx) => (
           <span
             key={idx}
-            className="px-3 py-1 bg-white/80 backdrop-blur-md text-[10px] font-bold text-slate-800 rounded-full shadow-sm border border-white/50 uppercase tracking-wider"
+            className="px-4 py-1.5 bg-white/30 backdrop-blur-xl text-[9px] font-black text-white rounded-full shadow-lg border border-white/20 uppercase tracking-[0.15em] transition-all hover:bg-white/50"
           >
             {tag}
           </span>
         ))}
       </div>
 
-      {/* Photo Count Tooltip */}
+      {/* Photo Count Tooltip Glass */}
       {data.fotos && data.fotos.length > 1 && (
-        <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md text-white text-[10px] px-2.5 py-1 rounded-full flex items-center gap-1.5 border border-white/20 z-20">
-          <Maximize2 size={10} strokeWidth={3} />
-          <span className="font-bold">{data.fotos.length} FOTOS</span>
+        <div className="absolute bottom-6 left-6 bg-black/30 backdrop-blur-xl text-white text-[9px] px-3 py-1.5 rounded-full flex items-center gap-2 border border-white/10 z-20 transition-all group-hover:bg-blue-600/40">
+          <Maximize2 size={12} strokeWidth={3} />
+          <span className="font-black tracking-widest">{data.fotos.length} FOTOS</span>
         </div>
       )}
 
-      {/* Quick View Message on Hover */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 pointer-events-none">
-        <span className="bg-white/20 backdrop-blur-lg text-white text-xs font-bold px-4 py-2 rounded-full border border-white/30 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-          Ver Portafolio
-        </span>
+      {/* Action Hover Glass */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-700 z-20 pointer-events-none">
+        <div className="bg-white/10 backdrop-blur-2xl text-white text-[10px] font-black px-6 py-3 rounded-full border border-white/20 shadow-2xl tracking-[0.2em] uppercase transform translate-y-10 group-hover:translate-y-0 transition-all duration-700 hover:bg-white hover:text-blue-600 pointer-events-auto">
+          Explorar Perfil
+        </div>
       </div>
     </div>
 
-    {/* Content Section */}
-    <div className="p-6 flex-1 flex flex-col relative bg-white">
-      <div className="flex justify-between items-start mb-1">
-        <h3 className="text-xl font-black text-slate-900 tracking-tight">{data.nombre}</h3>
-        <div className="flex items-center gap-1 px-2 py-0.5 bg-yellow-50 rounded-lg border border-yellow-100">
+    {/* Content Section Premium */}
+    <div className="p-8 flex-1 flex flex-col relative bg-transparent">
+      <div className="flex justify-between items-start mb-2">
+        <div>
+          <h3 className="text-2xl font-black text-slate-900 tracking-tighter leading-none mb-1">
+            {data.nombre}
+          </h3>
+          <p className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.2em]">
+            {data.especialidad}
+          </p>
+        </div>
+        <div className="flex items-center gap-1.5 px-3 py-1.5 bg-yellow-400/10 rounded-xl border border-yellow-400/20 shadow-sm">
           <Star size={12} fill="#eab308" className="text-yellow-500" />
-          <span className="text-xs font-bold text-yellow-700">{data.rating}.0</span>
+          <span className="text-[11px] font-black text-yellow-700">{data.rating}.0</span>
         </div>
       </div>
 
-      <p className="text-blue-600 font-bold text-xs uppercase tracking-widest mb-4">
-        {data.especialidad}
-      </p>
-
-      <div className="grid grid-cols-2 gap-3 mb-6">
-        <div className="flex items-center gap-2 text-slate-500">
-          <div className="w-7 h-7 bg-slate-50 rounded-lg flex items-center justify-center">
-            <Calendar size={12} className="text-slate-400" />
+      <div className="flex items-center gap-6 mt-6 mb-8">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 bg-blue-500/5 rounded-xl flex items-center justify-center border border-blue-500/10">
+            <Calendar size={14} className="text-blue-500" />
           </div>
-          <span className="text-xs font-medium">{data.genero}</span>
+          <span className="text-[11px] font-black text-slate-600 uppercase tracking-widest">
+            {data.genero}
+          </span>
         </div>
         {data.altura && (
-          <div className="flex items-center gap-2 text-slate-500">
-            <div className="w-7 h-7 bg-slate-50 rounded-lg flex items-center justify-center">
-              <MapPin size={12} className="text-slate-400" />
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 bg-indigo-500/5 rounded-xl flex items-center justify-center border border-indigo-500/10">
+              <MapPin size={14} className="text-indigo-500" />
             </div>
-            <span className="text-xs font-medium">{data.altura}</span>
+            <span className="text-[11px] font-black text-slate-600 uppercase tracking-widest">
+              {data.altura}
+            </span>
           </div>
         )}
       </div>
 
-      {/* Description or Snippet */}
+      {/* Description Snippet Glass */}
       {data.descripcion && (
-        <p className="text-xs text-slate-500 leading-relaxed mb-6 line-clamp-2 italic">
-          &quot;{data.descripcion}&quot;
-        </p>
+        <div className="mb-8 p-4 bg-slate-500/5 rounded-2xl border border-slate-500/10 italic">
+          <p className="text-xs text-slate-500 leading-relaxed line-clamp-2">
+            &quot;{data.descripcion}&quot;
+          </p>
+        </div>
       )}
 
-      <div className="mt-auto pt-4 border-t border-slate-50">
+      <div className="mt-auto pt-6 border-t border-white/40">
         <button
           onClick={() => onAdd(data)}
           disabled={isAdded}
-          className={`w-full py-3.5 px-6 rounded-2xl font-bold transition-all duration-300 flex items-center justify-center gap-2.5 ${
+          className={`w-full py-4 px-8 rounded-2xl font-black transition-all duration-500 flex items-center justify-center gap-3 tracking-widest uppercase text-[10px] ${
             isAdded
-              ? "bg-green-50 text-green-600 cursor-default border border-green-100"
-              : "bg-slate-900 text-white hover:bg-blue-600 hover:shadow-[0_10px_20px_-10px_rgba(37,99,235,0.4)] active:scale-95"
+              ? "bg-green-500/10 text-green-600 cursor-default border border-green-500/20"
+              : "bg-slate-900 text-white hover:bg-blue-600 hover:shadow-[0_20px_40px_-15px_rgba(37,99,235,0.5)] active:scale-[0.97] transform"
           }`}
         >
           {isAdded ? (
             <>
-              <span className="text-sm">Seleccionada</span>
-              <div className="bg-green-500 rounded-full p-0.5">
-                <CheckCircle size={14} className="text-white" />
-              </div>
+              <span>Seleccionada</span>
+              <CheckCircle size={16} strokeWidth={3} className="animate-bounce" />
             </>
           ) : (
             <>
-              <span className="text-sm">Añadir a Selección</span>
-              <ShoppingBag size={18} strokeWidth={2.5} />
+              <span>Añadir a Selección</span>
+              <ShoppingBag size={16} strokeWidth={3} />
             </>
           )}
         </button>
