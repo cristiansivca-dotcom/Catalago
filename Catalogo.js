@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -12,7 +12,7 @@ import MobileMenu from "./components/MobileMenu";
 import Toast from "./components/Toast";
 
 // Data
-import PROMOTORAS from "./data/promotoras";
+import { supabase } from "./lib/supabaseClient";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("inicio");
@@ -21,8 +21,37 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
+  const [promotoras, setPromotoras] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const whatsappNumber = "584121901044";
   const [toast, setToast] = useState(null);
+
+  useEffect(() => {
+    fetchPromotoras();
+  }, []);
+
+  const fetchPromotoras = async () => {
+    try {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from("talents")
+        .select("*")
+        .order("id", { ascending: true });
+
+      if (error) {
+        console.error("Error fetching promotoras:", error);
+        showToast("Error al cargar los talentos", "error");
+      } else {
+        setPromotoras(data || []);
+      }
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      showToast("Error inesperado", "error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const showToast = (message, type = "success") => {
     setToast({ message, type });
@@ -109,12 +138,18 @@ export default function App() {
 
         {activeTab === "talentos" && (
           <div className="py-12 animate-fade-in">
-            <TalentList
-              promotoras={PROMOTORAS}
-              cart={cart}
-              addToCart={addToCart}
-              onViewImage={setSelectedImage}
-            />
+            {loading ? (
+              <div className="flex justify-center items-center h-64">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+              </div>
+            ) : (
+              <TalentList
+                promotoras={promotoras}
+                cart={cart}
+                addToCart={addToCart}
+                onViewImage={setSelectedImage}
+              />
+            )}
           </div>
         )}
       </main>
