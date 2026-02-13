@@ -37,6 +37,7 @@ export default function App() {
       const { data, error } = await supabase
         .from("talents")
         .select("*")
+        .eq("active", true)
         .order("id", { ascending: true });
 
       if (error) {
