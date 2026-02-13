@@ -6,8 +6,9 @@ const TalentCard = ({ data, onAdd, isAdded, onViewImage }) => (
   <div className="group bg-white/40 backdrop-blur-md rounded-[2.5rem] shadow-sm hover:shadow-3xl transition-all duration-700 overflow-hidden border border-white/60 flex flex-col h-full relative ring-1 ring-white/20 hover:ring-blue-500/30">
     {/* Profile Image Section */}
     <div
-      className="h-[28rem] w-full bg-slate-200 relative flex items-center justify-center overflow-hidden cursor-pointer"
+      className="h-[28rem] w-full bg-slate-200 relative flex items-center justify-center overflow-hidden cursor-pointer no-download"
       onClick={() => onViewImage(data)}
+      onContextMenu={(e) => e.preventDefault()}
     >
       {/* Premium Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-40 group-hover:opacity-60 transition-opacity duration-700 z-10" />
@@ -17,7 +18,8 @@ const TalentCard = ({ data, onAdd, isAdded, onViewImage }) => (
           src={data.fotos[0]}
           alt={data.nombre}
           fill
-          className="object-cover relative z-0 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110 group-hover:rotate-1"
+          className="object-cover relative z-0 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110 group-hover:rotate-1 no-download"
+          draggable={false}
         />
       ) : (
         <div className="flex flex-col items-center gap-4 opacity-30">
@@ -102,11 +104,10 @@ const TalentCard = ({ data, onAdd, isAdded, onViewImage }) => (
         <button
           onClick={() => onAdd(data)}
           disabled={isAdded}
-          className={`w-full py-4 px-8 rounded-2xl font-black transition-all duration-500 flex items-center justify-center gap-3 tracking-widest uppercase text-[10px] ${
-            isAdded
+          className={`w-full py-4 px-8 rounded-2xl font-black transition-all duration-500 flex items-center justify-center gap-3 tracking-widest uppercase text-[10px] ${isAdded
               ? "bg-green-500/10 text-green-600 cursor-default border border-green-500/20"
               : "bg-slate-900 text-white hover:bg-blue-600 hover:shadow-[0_20px_40px_-15px_rgba(37,99,235,0.5)] active:scale-[0.97] transform"
-          }`}
+            }`}
         >
           {isAdded ? (
             <>

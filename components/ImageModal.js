@@ -50,13 +50,14 @@ const ImageModal = ({ images, altText, onClose }) => {
         className="relative max-w-5xl max-h-[85vh] w-full flex flex-col items-center justify-center"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative w-full h-[80vh]">
+        <div className="relative w-full h-[80vh] no-download" onContextMenu={(e) => e.preventDefault()}>
           <Image
             src={images[currentIndex]}
             alt={`${altText} - Foto ${currentIndex + 1}`}
             fill
-            className="object-contain rounded-sm shadow-2xl"
+            className="object-contain rounded-sm shadow-2xl no-download"
             priority
+            draggable={false}
           />
         </div>
 
@@ -69,13 +70,19 @@ const ImageModal = ({ images, altText, onClose }) => {
                   e.stopPropagation();
                   setCurrentIndex(idx);
                 }}
-                className={`w-16 h-16 flex-shrink-0 rounded-md overflow-hidden border-2 transition-all relative ${
-                  idx === currentIndex
+                className={`w-16 h-16 flex-shrink-0 rounded-md overflow-hidden border-2 transition-all relative no-download ${idx === currentIndex
                     ? "border-blue-500 opacity-100 scale-105"
                     : "border-transparent opacity-50 hover:opacity-100"
-                }`}
+                  }`}
+                onContextMenu={(e) => e.preventDefault()}
               >
-                <Image src={img} alt={`Thumb ${idx}`} fill className="object-cover" />
+                <Image
+                  src={img}
+                  alt={`Thumb ${idx}`}
+                  fill
+                  className="object-cover no-download"
+                  draggable={false}
+                />
               </button>
             ))}
           </div>

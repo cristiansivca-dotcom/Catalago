@@ -66,13 +66,17 @@ const Hero = ({ setActiveTab }) => (
           {/* Abstract visual element or placeholder for a hero image */}
           <div className="relative rounded-[2rem] overflow-hidden border border-white/20 shadow-2xl bg-white/5 backdrop-blur-xl p-4 transform rotate-2 hover:rotate-0 transition-all duration-700 ease-out group">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent"></div>
-            <div className="aspect-[4/5] rounded-xl overflow-hidden bg-slate-900 relative">
+            <div
+              className="aspect-[4/5] rounded-xl overflow-hidden bg-slate-900 relative no-download"
+              onContextMenu={(e) => e.preventDefault()}
+            >
               <Image
                 src="/modelos/waleska.jpg"
                 alt="Modelo SIVCA"
                 fill
-                className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-700"
+                className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-700 no-download"
                 priority
+                draggable={false}
               />
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
                 <p className="text-white font-bold text-xl">Staff Profesional</p>
